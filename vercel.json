@@ -33,10 +33,5 @@
         }
       ]
     }
-  ],
-  "renderers": {
-    "@vercel/remote-ui": {
-      "enabled": false
-    }
-  }
+  ]
 }

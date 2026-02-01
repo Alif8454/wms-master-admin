@@ -1,32 +1,70 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WMS Master Admin</title>
+  <title>WMS Master Admin - Preview @alifdev</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    /* Hide scrollbar for Chrome, Safari and Opera */
+    body { 
+      font-family: 'Inter', sans-serif; 
+      user-select: none;
+      -webkit-user-select: none;
+    }
     .no-scrollbar::-webkit-scrollbar { display: none; }
-    /* Hide scrollbar for IE, Edge and Firefox */
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .watermark {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      opacity: 0.3;
+      z-index: 9999;
+      pointer-events: none;
+      font-weight: bold;
+      background: #1e293b;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      border: 1px solid #334155;
+    }
+
+    /* Mencegah dragging gambar/elemen agar tidak mudah di-save */
+    img { pointer-events: none; }
   </style>
-<script type="importmap">
-{
-  "imports": {
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+  <script type="importmap">
+  {
+    "imports": {
+      "react/": "https://esm.sh/react@^19.2.4/",
+      "react": "https://esm.sh/react@^19.2.4",
+      "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+      "react-dom/client": "https://esm.sh/react-dom@^19.2.4/client"
+    }
   }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  </script>
 </head>
 <body class="bg-gray-50 text-gray-900">
   <div id="root"></div>
-<script type="module" src="/index.tsx"></script>
+  <div class="watermark">Preview Mode by @alifdev</div>
+
+  <!-- Entry Point Script -->
+  <script type="module" src="./index.tsx"></script>
+
+  <script>
+    // 1. Mematikan Klik Kanan (Masih aman untuk UI)
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Mematikan Shortcut Keyboard Dasar
+    document.onkeydown = function(e) {
+      if(e.keyCode == 123) return false; 
+      if(e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) return false;
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+
+    // Script anti-debugger agresif dihapus karena menyebabkan 'White Screen' di preview environment.
+    // Keamanan tetap terjaga melalui vercel.json (anti-iframe) dan sourcemap protection.
+  </script>
 </body>
 </html>

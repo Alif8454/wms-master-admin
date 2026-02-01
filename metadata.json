@@ -1,0 +1,5 @@
+{
+  "name": "WMS Master Admin",
+  "description": "A comprehensive Warehouse Management System admin template with full CRUD capabilities for inventory tracking, category management, and real-time stock analytics.",
+  "requestFramePermissions": []
+}

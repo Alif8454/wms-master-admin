@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WMS Master Admin - Preview @alifdev</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      font-family: 'Inter', sans-serif; 
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    .watermark {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      opacity: 0.3;
+      z-index: 9999;
+      pointer-events: none;
+      font-weight: bold;
+      background: #1e293b;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 12px;
+      border: 1px solid #334155;
+    }
+
+    /* Mencegah dragging gambar/elemen agar tidak mudah di-save */
+    img { pointer-events: none; }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "react/": "https://esm.sh/react@^19.2.4/",
+      "react": "https://esm.sh/react@^19.2.4",
+      "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
+    }
+  }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+  <div id="root"></div>
+  <div class="watermark">Preview Mode by @alifdev</div>
+
+  <script>
+    // 1. Mematikan Klik Kanan
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Mematikan Shortcut Keyboard
+    document.onkeydown = function(e) {
+      if(e.keyCode == 123) return false; 
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+      if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+      if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+    }
+
+    // 3. Advanced Anti-Debugger (Debugger Loop)
+    // Script ini akan terus memicu breakpoint jika Console terbuka
+    (function() {
+      const block = function() {
+        setInterval(function() {
+          (function() {}.constructor("debugger")());
+        }, 50);
+      };
+      try {
+        block();
+      } catch (err) {}
+    })();
+
+    // 4. Deteksi DevTools terbuka
+    let devtoolsOpen = false;
+    const element = new Image();
+    Object.defineProperty(element, 'id', {
+      get: function() {
+        devtoolsOpen = true;
+        window.location.href = "about:blank"; // Tendang user jika nekad buka console
+      }
+    });
+    console.log('%c', element);
+  </script>
+</body>
+</html>

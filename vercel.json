@@ -1,8 +1,12 @@
 
 {
   "github": {
-    "silent": true
+    "silent": true,
+    "enabled": false
   },
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "framework": "react",
   "headers": [
     {
       "source": "/(.*)",
@@ -21,9 +25,18 @@
         },
         {
           "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
+          "value": "no-referrer"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     }
-  ]
+  ],
+  "renderers": {
+    "@vercel/remote-ui": {
+      "enabled": false
+    }
+  }
 }
